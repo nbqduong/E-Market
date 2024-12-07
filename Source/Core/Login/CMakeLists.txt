@@ -1,25 +1,28 @@
 # #-------------------DEFINE ZONE----------------------#
+# Project setup
 # project(AddFunctionPythonBinding)
-#this library
+# Define this library
 set(LIBRARY_NAME "login")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 set(LIBRARY_SOURCES
-        Login.cpp
-        LoginBinding.cpp
+    Login.cpp
+    LoginBinding.cpp
 )
 set(LIBRARY_HEADERS
-        Login.h
+    Login.h
 )
 
-# #include more
+# Include more libraries
 set(LIBRARIES_TO_LINK pybind11::embed Python3::Python)
 
-# #----------------------------------------------------#
-add_library(${LIBRARY_NAME} MODULE  ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
+# Create the target
+add_library(${LIBRARY_NAME} MODULE ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
 target_include_directories(${LIBRARY_NAME} PUBLIC ${LIBRARY_INCLUDES})
-target_link_libraries( ${LIBRARY_NAME} PUBLIC ${LIBRARIES_TO_LINK})
-# # set_target_properties(${LIBRARY_NAME} PROPERTIES PREFIX "")
+target_link_libraries(${LIBRARY_NAME} PUBLIC ${LIBRARIES_TO_LINK})
+
+# Set the target properties
+set_target_properties(${LIBRARY_NAME} PROPERTIES PREFIX "")
 
 # Set the suffix based on the platform
 if(WIN32)
@@ -27,6 +30,3 @@ if(WIN32)
 elseif(UNIX)
     set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX ".so")  # Linux/macOS use .so
 endif()
-
-
-
