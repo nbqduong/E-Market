@@ -13,4 +13,7 @@ CMakeUserPresets.json
 /cmake-build-debug/
 /build/
 /.github/
-/Source/build/
+/Source/Core/build/
+*.so
+*.pyd
+/.vscode/
