@@ -1,0 +1,22 @@
+<mxfile host="65bd71144e">
+    <diagram id="ouMV4mBydd-ttl64JqRw" name="Page-1">
+        <mxGraphModel dx="1002" dy="611" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="DB" style="fontStyle=0;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="540" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="ValidateService" style="fontStyle=0;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="420" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Receiver" style="fontStyle=0;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="280" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="UI" style="fontStyle=0;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="70" width="120" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
