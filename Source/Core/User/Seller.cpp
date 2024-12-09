@@ -1,6 +1,12 @@
 #include "Seller.h"
-Shop Seller::testfunc(){
-    m_shop.test();
-    // std::cout << "Seller test debugging" << std::endl;
-    return m_shop;
-}   
+const Product& Seller::getProduct(const string& name){
+    return m_shop.getProduct(name);
+}
+
+list<Product>& Seller::getAllProducts(){
+    return m_shop.getAllProducts();
+}
+
+void Seller::addProductToShop(const string& name, const int& price, const int& quantity, const string& description){
+    m_shop.addProduct(name, price, quantity, description);
+}

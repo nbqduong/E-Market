@@ -20,3 +20,12 @@ bool User::changePassword(const string& newPassword){
     m_password = newPassword;
     return m_password != newPassword;
 }
+
+void User::reset(){
+    m_id = 0;
+}
+
+void User::setAddress(const string& newAddress){
+    m_address = newAddress;
+}
+

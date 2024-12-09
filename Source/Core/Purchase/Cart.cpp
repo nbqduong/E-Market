@@ -4,10 +4,11 @@ bool Cart::addToCart(int id, int quantity) {
     try {
         // Use Inventory singleton to get the product
         // This will throw an exception if product not found or insufficient quantity
-        const Product& product = Inventory::getInstance().getProduct(id, quantity);
+        Product product = Inventory::getInstance().purchaseProduct(id, quantity);
         
         // If successful, add the product to cart
-        products.push_back(product);
+        product.setQuantity(quantity);
+        m_products.push_back(product);
         
         return true;
     }
@@ -16,4 +17,8 @@ bool Cart::addToCart(int id, int quantity) {
         // Return false to indicate failure
         return false;
     }
+}
+
+const list<Product>& Cart::getProducts() const{
+    return m_products;
 }

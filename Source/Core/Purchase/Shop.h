@@ -17,13 +17,13 @@ public:
     //Use Inventory's method to implement this method
     bool addProduct(const string& name, const int & price, const int & quantity, const string& description);
 
-    void test(){
-        std::cout << "test fucntion from shop" << std::endl;
-    }
+    const Product& getProduct(const string& name);
+
+    list<Product>& getAllProducts();
     
   
 private:
-    list<Product> products;
+    list<Product> m_products;
     string m_name;
     static int m_id;
 };

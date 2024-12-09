@@ -12,7 +12,7 @@ Inventory& Inventory::getInstance() {
     return instance;
 }
 
-const Product& Inventory::getProduct(int id, int quantity) {
+Product Inventory::purchaseProduct(int id, int quantity) {
     // Iterate through the products list to find the product with matching id
     for (auto& product : products) {
         if (product.getId() == id) {
@@ -66,4 +66,21 @@ const Product& Inventory::addProduct(Product& product) {
     product.setId(lastProductID);
     products.push_back(product);
     return product;
+}
+
+const list<Product>& Inventory::getAllProducts() const{
+    return products;
+}
+
+void Inventory::reset(){
+    products.clear();
+    lastProductID = 0;
+}
+
+const Product& Inventory::findProductById(int id) const {
+    for (auto& product : products) {
+        if (product.getId() == id) {
+            return product;
+        }
+    }
 }

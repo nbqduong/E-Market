@@ -17,11 +17,20 @@ public:
     // Singleton access method
     static Inventory& getInstance();
 
-    // Get product follow product id, if not enough quantity, throw exception and return empty
-    const Product& getProduct(int id, int quantity);
+    // buy product follow product id
+    Product purchaseProduct(int id, int quantity);
 
     // Add product to inventory
     const Product& addProduct(Product& product);
+
+    //Get all products
+    const list<Product>& getAllProducts() const;
+
+    //find product by id
+    const Product& findProductById(int id) const;
+
+    //Reset all products
+    void reset();
 
 private:
     // Private constructor to prevent direct instantiation

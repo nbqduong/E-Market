@@ -50,3 +50,7 @@ int Product::getShopID() const {
 void Product::setId(int id){
     m_id = id;
 }
+
+void Product::setQuantity(int quantity){
+    if(quantity > 0) m_quantity = quantity;
+}

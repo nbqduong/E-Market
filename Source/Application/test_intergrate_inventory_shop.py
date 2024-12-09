@@ -12,10 +12,22 @@ class TestSellerModule(unittest.TestCase):
     def test_add_product_to_shop(self):
         """Test adding a product to the shop."""
         products = list(self.seller.getAllProducts())
+        # test init list product
         p = list(self.inventory.getAllProducts())
         self.assertEqual(len(products), 1, "Product count mismatch after adding.")
         self.assertEqual(products[0].getDescription(), "add product for testing", "Product description mismatch.")
         self.assertEqual(p[0].getDescription(), "add product for testing", "Product description mismatch with inventory.")
+
+        #add more items to inventory
+        self.seller.addProductToShop("test_product1", 20, 10, "add product for testing1")
+        self.seller.addProductToShop("test_product2", 30, 10, "add product for testing2")
+
+        #test after adding product
+        p = list(self.inventory.getAllProducts())
+        self.assertEqual(p[1].getDescription(), "add product for testing1", "Product description mismatch with inventory.")
+        self.assertEqual(p[2].getDescription(), "add product for testing2", "Product description mismatch with inventory.")
+        self.assertEqual(p[1].getPrice(), 20, "Product description mismatch with inventory.")
+        self.assertEqual(p[2].getPrice(), 30, "Product description mismatch with inventory.")
 
     def test_get_product_by_name(self):
         """Test retrieving a product by its name."""
@@ -27,9 +39,4 @@ class TestSellerModule(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-    #add this by testcase then
-    p = list(Inventory.getAllProducts())
-    print("Product testing afer all")
-    print(p[0].getDescription())
 

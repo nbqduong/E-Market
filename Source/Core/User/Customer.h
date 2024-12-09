@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include "User.h"
+#include "Cart.h"
 using std::string;
 
 class Customer: public User{
@@ -13,10 +14,14 @@ public:
         std::cout << "Customer constructor debugging" << std::endl;
     }
     const string getAddress();
+    void addToCart(int id, int amount);
+
+    const list<Product>& getAllCartItems() const;
 private:
     //cart
+    Cart m_cart; //cart
     //purchase history
-    //address
+
 };
 
 #endif

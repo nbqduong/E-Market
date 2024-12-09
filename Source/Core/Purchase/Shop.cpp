@@ -29,7 +29,7 @@ bool Shop::addProduct(const string& name, const int& price, const int& quantity,
         const Product& addedProduct = Inventory::getInstance().addProduct(newProduct);
         
         // Add the product to the shop's local product list
-        products.push_back(addedProduct);
+        m_products.push_back(addedProduct);
         
         return true;
     }
@@ -37,4 +37,14 @@ bool Shop::addProduct(const string& name, const int& price, const int& quantity,
         // If an exception occurs during product addition
         return false;
     }
+}
+
+const Product& Shop::getProduct(const string& name){
+        for (auto& product : m_products) {
+            if (product.getName() == name) return product;
+        }
+}
+
+list<Product>& Shop::getAllProducts(){
+    return m_products;
 }

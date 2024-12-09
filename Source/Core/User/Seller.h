@@ -13,7 +13,12 @@ public:
     :User(name,email,password){
         std::cout << "Seller constructor debugging" << std::endl;
     }
-    Shop testfunc();
+    
+    void addProductToShop(const string& name, const int& price, const int& quantity, const string& description);
+
+    const Product& getProduct(const string& name);
+
+    list<Product>& getAllProducts();
     
 private:
     //shop

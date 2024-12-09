@@ -12,6 +12,8 @@ public:
     const string& getName() const;
     int getPrice() const;
     int getQuantity() const;
+
+    void setQuantity(int quantity);
     double getStar() const;
     int getRate() const;
     const string& getDescription() const;
