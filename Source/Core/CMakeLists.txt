@@ -10,6 +10,8 @@ project(
 
 # Set the C++ standard to C++11 or later
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find MySQL Connector/C++
 find_package(pybind11 REQUIRED)
@@ -22,7 +24,11 @@ elseif(UNIX)
     set(PLATFORM_SUFFIX "linux_x86_64")
 endif()
 
+add_subdirectory(Common)
+add_subdirectory(Purchase)
 add_subdirectory(Login)
+add_subdirectory(User)
+
 
 
 # Add the source code file (adjust path if needed)

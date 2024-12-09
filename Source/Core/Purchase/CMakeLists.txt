@@ -1,20 +1,26 @@
 #-------------------DEFINE ZONE----------------------#
 #this library
-set(LIBRARY_NAME "database")
+set(LIBRARY_NAME "purchase")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 set(LIBRARY_SOURCES
-        
+        Cart.cpp
+        Inventory.cpp
+        Product.cpp
+        Shop.cpp  
 )
 set(LIBRARY_HEADERS
-        DBPlugin.h
+        Cart.h
+        Inventory.h
+        Product.h
+        Shop.h
 )
 
 # Include more libraries
-set(LIBRARIES_TO_LINK pybind11::embed Python3::Python)
+set(LIBRARIES_TO_LINK pybind11::embed Python3::Python common)
 
 # Create the target
-add_library(${LIBRARY_NAME} MODULE ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
+add_library(${LIBRARY_NAME} MODULE STATIC ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
 target_include_directories(${LIBRARY_NAME} PUBLIC ${LIBRARY_INCLUDES})
 target_link_libraries(${LIBRARY_NAME} PUBLIC ${LIBRARIES_TO_LINK})
 
