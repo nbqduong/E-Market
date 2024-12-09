@@ -1,5 +1,5 @@
-#ifndef SELLER_H
-#define SELLER_H
+#ifndef ADMIN_H
+#define ADMIN_H
 #include <string>
 #include "User.h"
 using std::string;

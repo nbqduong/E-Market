@@ -1,11 +1,15 @@
 #-------------------DEFINE ZONE----------------------#
 #this library
-set(LIBRARY_NAME "Puchase")
+set(LIBRARY_NAME "user")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 set(LIBRARY_SOURCES
         User.cpp
+        Customer.cpp
+        Seller.cpp
+        UserBinding.cpp
 )
+
 set(LIBRARY_HEADERS
         Admin.h
         Customer.h
@@ -14,7 +18,7 @@ set(LIBRARY_HEADERS
 )
 
 # Include more libraries
-set(LIBRARIES_TO_LINK pybind11::embed Python3::Python)
+set(LIBRARIES_TO_LINK pybind11::embed Python3::Python purchase common)
 
 # Create the target
 add_library(${LIBRARY_NAME} MODULE ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})

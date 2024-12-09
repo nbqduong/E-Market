@@ -5,6 +5,7 @@ int Shop::m_id = 0;
 
 // Default constructor increments the shop ID
 Shop::Shop() {
+    std::cout << "Shop constructor Debug" << std::endl;
     m_id++; // Increment static shop ID for each new shop
 }
 

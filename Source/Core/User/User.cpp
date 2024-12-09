@@ -1,7 +1,9 @@
 #include "User.h"
 
+int User::m_id = 0;
+
 User::User(const std::string& name, const std::string& email, const std::string& password)
-    : m_name(name), m_email(email), m_password(password) {}
+    : m_name(name), m_email(email), m_password(password) {m_id++;}
 
 const std::string& User::getName(){
     return m_name;

@@ -12,7 +12,7 @@ public:
     bool changePassword(const string& newPassword);
 protected:
     string m_name;
-    int m_id;
+    static int m_id;
     string m_email;
     string m_password;
 };
