@@ -1,13 +1,19 @@
 #-------------------DEFINE ZONE----------------------#
 #this library
-set(LIBRARY_NAME "database")
+set(LIBRARY_NAME "Puchase")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 set(LIBRARY_SOURCES
-        
+        Cart.cpp
+        Inventory.cpp
+        Product.cpp
+        Shop.cpp  
 )
 set(LIBRARY_HEADERS
-        DBPlugin.h
+        Cart.h
+        Inventory.h
+        Product.h
+        Shop.h
 )
 
 # Include more libraries

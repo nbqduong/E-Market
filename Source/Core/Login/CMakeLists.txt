@@ -1,7 +1,4 @@
-# #-------------------DEFINE ZONE----------------------#
-# Project setup
-# project(AddFunctionPythonBinding)
-# Define this library
+# #-------------------DEFINE ZONE----------------------##
 set(LIBRARY_NAME "login")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
