@@ -49,6 +49,12 @@ def delete_build_folder(build_folder):
 def setup_conan(core_dir):
     """Runs the required Conan and CMake commands."""
     try:
+        print("Running Conan profile detect command...")
+        subprocess.check_call(
+            ["conan", "profile", "detect"],
+            cwd=core_dir
+        )
+
          # Determine the platform and set the appropriate preset
         cmake_preset = "conan-default" if platform.system() == 'Windows' else "conan-debug"
 
