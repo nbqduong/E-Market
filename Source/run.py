@@ -54,26 +54,31 @@ def setup_conan(core_dir):
             ["conan", "profile", "detect"],
             cwd=core_dir
         )
+    except Exception as e:
+        pass
+    finally:
+        try:
+        
 
-         # Determine the platform and set the appropriate preset
-        cmake_preset = "conan-default" if platform.system() == 'Windows' else "conan-debug"
+            # Determine the platform and set the appropriate preset
+            cmake_preset = "conan-default" if platform.system() == 'Windows' else "conan-debug"
 
-        print("Running Conan install command...")
-        subprocess.check_call(
-            ["conan", "install", ".", "-s", "build_type=Debug", "--build=missing"],
-            cwd=core_dir
-        )
+            print("Running Conan install command...")
+            subprocess.check_call(
+                ["conan", "install", ".", "-s", "build_type=Debug", "--build=missing"],
+                cwd=core_dir
+            )
 
-        print(f"Running CMake preset for {cmake_preset}...")
-        subprocess.check_call(
-            ["cmake", "--preset", cmake_preset],
-            cwd=core_dir
-        )
+            print(f"Running CMake preset for {cmake_preset}...")
+            subprocess.check_call(
+                ["cmake", "--preset", cmake_preset],
+                cwd=core_dir
+            )
 
-    except subprocess.CalledProcessError as e:
-        print(f"Error during setup conan process: {e}")
-        return False
-    return True
+        except subprocess.CalledProcessError as e:
+            print(f"Error during setup conan process: {e}")
+            return False
+        return True
 
 
 def build_cmake(core_dir):

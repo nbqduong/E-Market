@@ -4,7 +4,7 @@ test_get_product_by_name (test_intergrate_inventory_shop.TestSellerModule)
 Test retrieving a product by its name. ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.012s
+Ran 2 tests in 0.008s
 
 OK
 test_add_product_to_shop (test_intergrate_shop.TestSellerModule)
@@ -13,7 +13,7 @@ test_get_product_by_name (test_intergrate_shop.TestSellerModule)
 Test retrieving a product by its name. ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.005s
+Ran 2 tests in 0.009s
 
 OK
 test_customer_class (test_user.TestUserModule) ... ok
@@ -21,13 +21,13 @@ test_seller_class (test_user.TestUserModule) ... ok
 test_user_class (test_user.TestUserModule) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.006s
+Ran 3 tests in 0.009s
 
 OK
 test_customer_cart_and_inventory (test_user_buying.TestECommerceSystem) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.003s
+Ran 1 test in 0.004s
 
 OK
 
