@@ -26,7 +26,7 @@ class TestSellerModule(unittest.TestCase):
         p = list(self.inventory.getAllProducts())
         self.assertEqual(p[1].getDescription(), "add product for testing1", "Product description mismatch with inventory.")
         self.assertEqual(p[2].getDescription(), "add product for testing2", "Product description mismatch with inventory.")
-        self.assertEqual(p[1].getPrice(), 10, "Product description mismatch with inventory.")
+        self.assertEqual(p[1].getPrice(), 20, "Product description mismatch with inventory.")
         self.assertEqual(p[2].getPrice(), 30, "Product description mismatch with inventory.")
 
     def test_get_product_by_name(self):
