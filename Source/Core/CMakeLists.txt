@@ -26,7 +26,7 @@ elseif(UNIX)
     set(PLATFORM_SUFFIX "linux_x86_64")
 endif()
 
-add_subdirectory(Common)
+add_subdirectory(General)
 add_subdirectory(Purchase)
 add_subdirectory(Login)
 add_subdirectory(User)
