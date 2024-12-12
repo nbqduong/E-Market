@@ -3,14 +3,14 @@ name: Build Workflow
 on:
   push:
     branches:
-      - master
+      - master  # Trigger on push to the 'master' branch
   pull_request:
     branches:
-      - master
+      - master  # Trigger on pull requests to the 'master' branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
       # Checkout the repository
@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Install required packages and cache them
+      # Install required packages and cache pip dependencies
       - name: Cache pip dependencies
         uses: actions/cache@v3
         with:
@@ -48,7 +48,7 @@ jobs:
         run: |
           source ~/.profile
 
-      # Run build script
+      # Run your build script
       - name: Run build script
         run: |
           cd Source
@@ -63,9 +63,16 @@ jobs:
             echo "Build succeeded."
           fi
 
+    # Optionally, if you want to save artifacts to pass to the next job, you can use this
+    # - name: Upload build artifacts
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: build-output
+    #     path: ./path-to-output
+
   test:
-    needs: build
-    runs-on: ubuntu-latest
+    needs: build  # This job depends on the successful completion of the 'build' job
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
       # Checkout the repository
@@ -103,14 +110,14 @@ jobs:
         run: |
           source ~/.profile
 
-      # Run tests
+      # Run your tests
       - name: Run tests
         run: |
           cd Source
-          result=$(python3 run.py test)
+          result=$(python3 run.py test)  # Assuming test is the target for running tests
           echo "$result"
           
-          # Check for failure
+          # Check if the result contains any failure (look for 'Error' or 'Exception')
           if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
             echo "Tests failed."
             exit 1
