@@ -1,4 +1,4 @@
-name: Build Workflow
+name: Unitest Workflow
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master  # Trigger on pull requests to the 'master' branch
 
 jobs:
-  build:
+  BuildAndTest:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
