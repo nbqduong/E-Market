@@ -3,10 +3,10 @@ name: Build Workflow
 on:
   push:
     branches:
-      - master  # Trigger on push to the 'main' branch
+      - master  # Trigger on push to the 'master' branch
   pull_request:
     branches:
-      - master  # Trigger on pull requests to the 'main' branch
+      - master  # Trigger on pull requests to the 'master' branch
 
 jobs:
   build:
@@ -33,13 +33,13 @@ jobs:
       - name: Install Conan
         run: |
           pip install conan
-          
+
       # Ensure .profile is sourced
       - name: Source .profile
         run: |
           source ~/.profile
 
-      # Run your build script
+      # Run your build script and tests
       - name: Run build script and tests
         run: |
           cd Source
