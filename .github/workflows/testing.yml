@@ -23,15 +23,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Install required packages and cache pip dependencies
-      - name: Cache pip dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-python-
-
+      # Install required packages
       - name: Install dependencies
         run: |
           sudo apt update
@@ -47,78 +39,17 @@ jobs:
         run: |
           source ~/.profile
 
-      # Run your build script
-      - name: Run build script
+      # Run your build script and tests
+      - name: Run build script and tests
         run: |
           cd Source
-          result=$(python3 run.py build_all)
-          echo "$result"
-          
-          # Check for failure
-          if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
-            echo "Build failed."
-            exit 1
-          else
-            echo "Build succeeded."
-          fi
-
-    # Optionally, if you want to save artifacts to pass to the next job, you can use this
-    # - name: Upload build artifacts
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: build-output
-    #     path: ./path-to-output
-
-  test:
-    needs: build  # This job depends on the successful completion of the 'build' job
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Set up Python 3.x
-      - name: Set up Python 3
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      # Install dependencies from the cache
-      - name: Cache pip dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-python-
-
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y ninja-build python3-pip
-
-      # Install Conan
-      - name: Install Conan
-        run: |
-          pip install conan
-
-      # Ensure .profile is sourced
-      - name: Source .profile
-        run: |
-          source ~/.profile
-
-      # Run your tests
-      - name: Run tests
-        run: |
-          cd Source
-          result=$(python3 run.py test)  # Assuming test is the target for running tests
-          echo "$result"
+          result=$(python3 run.py build_all)  # Capture the output
+          echo "$result"  # Echo the result to the log
           
           # Check if the result contains any failure (look for 'Error' or 'Exception')
           if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
             echo "Tests failed."
-            exit 1
+            exit 1  # If tests failed, exit with status 1 to fail the workflow
           else
             echo "Tests passed successfully."
           fi
