@@ -43,13 +43,13 @@ jobs:
       - name: Run build script and tests
         run: |
           cd Source
-          python3 run.py build_all
-
-      # Check the status of tests
-      - name: Check test results
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "Tests passed successfully."
-          else
+          result=$(python3 run.py build_all)  # Capture the output
+          echo "$result"  # Echo the result to the log
+          
+          # Check if the result contains any failure (look for 'Error' or 'Exception')
+          if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
             echo "Tests failed."
             exit 1  # If tests failed, exit with status 1 to fail the workflow
+          else
+            echo "Tests passed successfully."
+          fi
