@@ -12,7 +12,6 @@ _deps
 CMakeUserPresets.json
 /cmake-build-debug/
 /build/
-/.github/
 /Source/Core/build/
 *.so
 *.pyd
