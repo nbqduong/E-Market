@@ -3,14 +3,14 @@ name: Build Workflow
 on:
   push:
     branches:
-      - master  # Trigger on push to the 'master' branch
+      - master
   pull_request:
     branches:
-      - master  # Trigger on pull requests to the 'master' branch
+      - master
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout the repository
@@ -23,11 +23,20 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Install required packages
+      # Install required packages and cache them
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
       - name: Install dependencies
         run: |
           sudo apt update
           sudo apt install -y ninja-build python3-pip
+          pip install -r requirements.txt  # Assuming dependencies are listed in requirements.txt
 
       # Install Conan
       - name: Install Conan
@@ -39,17 +48,72 @@ jobs:
         run: |
           source ~/.profile
 
-      # Run your build script and tests
-      - name: Run build script and tests
+      # Run build script
+      - name: Run build script
         run: |
           cd Source
-          result=$(python3 run.py build_all)  # Capture the output
-          echo "$result"  # Echo the result to the log
+          result=$(python3 run.py build_all)
+          echo "$result"
           
-          # Check if the result contains any failure (look for 'Error' or 'Exception')
+          # Check for failure
+          if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
+            echo "Build failed."
+            exit 1
+          else
+            echo "Build succeeded."
+          fi
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Python 3.x
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Install dependencies from the cache
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ninja-build python3-pip
+          pip install -r requirements.txt
+
+      # Install Conan
+      - name: Install Conan
+        run: |
+          pip install conan
+
+      # Ensure .profile is sourced
+      - name: Source .profile
+        run: |
+          source ~/.profile
+
+      # Run tests
+      - name: Run tests
+        run: |
+          cd Source
+          result=$(python3 run.py test)
+          echo "$result"
+          
+          # Check for failure
           if [[ "$result" == *"Error"* ]] || [[ "$result" == *"Exception"* ]]; then
             echo "Tests failed."
-            exit 1  # If tests failed, exit with status 1 to fail the workflow
+            exit 1
           else
             echo "Tests passed successfully."
           fi
