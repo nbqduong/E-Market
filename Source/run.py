@@ -84,6 +84,38 @@ def build_cmake(core_dir):
     return True
 
 
+def execute_tests():
+    """
+    Change the directory to 'Application' and run the 'run_all_test.py' script.
+    """
+    try:
+        # Change to the 'Application' directory
+        os.chdir("Application")
+        print("Changed directory to 'Application'.")
+
+        # Determine the correct Python executable based on the OS
+        python_executable = "python3" if platform.system() != "Windows" else "python"
+
+        # Run the 'run_all_test.py' script with the correct Python interpreter
+        result = subprocess.run([python_executable, "run_all_test.py"], check=True, capture_output=True, text=True)
+        
+        # Print the output of the script
+        print("Script Output:")
+        print(result.stdout)
+
+    except FileNotFoundError:
+        print("Directory 'Application' does not exist.")
+    except subprocess.CalledProcessError as e:
+        print("Error while running the script.")
+        print("Script Error Output:")
+        print(e.stderr)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    finally:
+        # Optionally return to the original directory
+        os.chdir("..")
+        print("Returned to the original directory.")
+
 def main():
     # Set the Core directory dynamically relative to the script's location
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -102,9 +134,12 @@ def main():
         # Just run the build step and copy .pyd files
         if build_cmake(core_dir):
             copy_pyd_files(build_folder, application_folder)
+    elif len(sys.argv) > 1 and sys.argv[1] == 'test':
+        pass
     else:
         print("Invalid argument. Use 'build all' to perform all steps or 'build' to build the project.")
 
 
 if __name__ == "__main__":
     main()
+    execute_tests()

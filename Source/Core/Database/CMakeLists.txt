@@ -4,10 +4,12 @@ set(LIBRARY_NAME "database")
 set(LIBRARY_INCLUDES "./" "${CMAKE_BINARY_DIR}/configured_files/include")
 
 set(LIBRARY_SOURCES
-        
+        DBPlugin.cpp
+        WsClient.cpp
 )
 set(LIBRARY_HEADERS
         DBPlugin.h
+        WsClient.h
 )
 
 # Include more libraries

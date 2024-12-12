@@ -1,33 +1,33 @@
-test_add_product_to_shop (test_intergrate_inventory_shop.TestSellerModule.test_add_product_to_shop)
+test_add_product_to_shop (test_intergrate_inventory_shop.TestSellerModule)
 Test adding a product to the shop. ... ok
-test_get_product_by_name (test_intergrate_inventory_shop.TestSellerModule.test_get_product_by_name)
+test_get_product_by_name (test_intergrate_inventory_shop.TestSellerModule)
 Test retrieving a product by its name. ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.006s
+Ran 2 tests in 0.012s
 
 OK
-test_add_product_to_shop (test_intergrate_shop.TestSellerModule.test_add_product_to_shop)
+test_add_product_to_shop (test_intergrate_shop.TestSellerModule)
 Test adding a product to the shop. ... ok
-test_get_product_by_name (test_intergrate_shop.TestSellerModule.test_get_product_by_name)
+test_get_product_by_name (test_intergrate_shop.TestSellerModule)
 Test retrieving a product by its name. ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.006s
+Ran 2 tests in 0.005s
 
 OK
-test_customer_class (test_user.TestUserModule.test_customer_class) ... ok
-test_seller_class (test_user.TestUserModule.test_seller_class) ... ok
-test_user_class (test_user.TestUserModule.test_user_class) ... ok
+test_customer_class (test_user.TestUserModule) ... ok
+test_seller_class (test_user.TestUserModule) ... ok
+test_user_class (test_user.TestUserModule) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.004s
+Ran 3 tests in 0.006s
 
 OK
-test_customer_cart_and_inventory (test_user_buying.TestECommerceSystem.test_customer_cart_and_inventory) ... ok
+test_customer_cart_and_inventory (test_user_buying.TestECommerceSystem) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.006s
+Ran 1 test in 0.003s
 
 OK
 

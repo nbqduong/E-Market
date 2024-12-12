@@ -13,6 +13,7 @@ class ExampleRecipe(ConanFile):
 
     def requirements(self):
         self.requires("pybind11/2.13.6")
+        self.requires("qt/6.7.3")
 
     def layout(self):
         cmake_layout(self)

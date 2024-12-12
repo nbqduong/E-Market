@@ -18,19 +18,23 @@ set(LIBRARY_HEADERS
 )
 
 # Include more libraries
-set(LIBRARIES_TO_LINK pybind11::embed Python3::Python purchase common)
+set(LIBRARIES_TO_LINK pybind11::embed Python3::Python purchase_include common)
 
-# Create the target
-add_library(${LIBRARY_NAME} MODULE ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
-target_include_directories(${LIBRARY_NAME} PUBLIC ${LIBRARY_INCLUDES})
-target_link_libraries(${LIBRARY_NAME} PUBLIC ${LIBRARIES_TO_LINK})
+#------------------- Helper Function ----------------#
+function(create_library target_name type)
+    add_library(${target_name} ${type} ${LIBRARY_SOURCES} ${LIBRARY_HEADERS})
+    target_include_directories(${target_name} PUBLIC ${LIBRARY_INCLUDES})
+    target_link_libraries(${target_name} PUBLIC ${LIBRARIES_TO_LINK})
+    set_target_properties(${target_name} PROPERTIES PREFIX "")
 
-# Set the target properties
-set_target_properties(${LIBRARY_NAME} PROPERTIES PREFIX "")
+    # Set suffix based on platform
+    if(WIN32)
+        set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
+    elseif(UNIX)
+        set_target_properties(${target_name} PROPERTIES SUFFIX ".so")
+    endif()
+endfunction()
 
-# Set the suffix based on the platform
-if(WIN32)
-    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX ".pyd")  # Windows uses .pyd
-elseif(UNIX)
-    set_target_properties(${LIBRARY_NAME} PROPERTIES SUFFIX ".so")  # Linux/macOS use .so
-endif()
+#------------------- Generate Libraries ----------------#
+create_library(${LIBRARY_NAME} MODULE)
+create_library(${LIBRARY_NAME}_include STATIC)

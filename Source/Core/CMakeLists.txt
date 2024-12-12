@@ -12,6 +12,8 @@ project(
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 
 # Find MySQL Connector/C++
 find_package(pybind11 REQUIRED)
@@ -28,6 +30,11 @@ add_subdirectory(Common)
 add_subdirectory(Purchase)
 add_subdirectory(Login)
 add_subdirectory(User)
+
+
+
+add_executable(CLib test.cpp)
+target_link_libraries(CLib PUBLIC user_include)
 
 
 

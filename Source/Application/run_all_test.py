@@ -3,6 +3,22 @@ import sys
 import io
 from user import Inventory, User
 
+class OutputCapture:
+    def __init__(self, file):
+        self.file = file
+        self.stdout = sys.stdout
+
+    def write(self, message):
+        # Write to the file
+        self.file.write(message)
+        # Print to the console
+        self.stdout.write(message)
+
+    def flush(self):
+        # This is needed to ensure output is written immediately
+        self.file.flush()
+        self.stdout.flush()
+
 def run_all_tests():
     # Discover all test cases in the current directory
     loader = unittest.TestLoader()
@@ -10,23 +26,16 @@ def run_all_tests():
 
     # Open a file to capture the output
     with open('test_results.txt', 'w') as result_file:
-        # Create an in-memory string buffer to capture the output of each test run
-        result_buffer = io.StringIO()
+        # Create an instance of OutputCapture to capture and redirect the output
+        output_capture = OutputCapture(result_file)
 
-        # Create a TextTestRunner with the buffer to capture output
-        runner = unittest.TextTestRunner(stream=result_buffer, verbosity=2)
+        # Create a TextTestRunner with the output_capture to write to both file and console
+        runner = unittest.TextTestRunner(stream=output_capture, verbosity=2)
 
         # Run the tests for each test file individually and reset after each file
         for test_suite in suite:
             # Run the test suite
             result = runner.run(test_suite)
-
-            # Write the result from the buffer to the file
-            result_file.write(result_buffer.getvalue())
-
-            # Reset the buffer for the next test suite
-            result_buffer.truncate(0)
-            result_buffer.seek(0)
 
             # Reset the Inventory singleton state and User class after running the test suite
             Inventory.getInstance().reset()
@@ -37,7 +46,7 @@ def run_all_tests():
                 result_file.write("\nSome tests failed or had errors.\n")
                 sys.exit(1)  # Exit with a non-zero status code to indicate failure
 
-        # If all tests passed, write success message to file
+        # If all tests passed, write success message to file and print to console
         result_file.write("\nAll tests passed successfully.\n")
         sys.exit(0)  # Exit with zero status code to indicate success
 
