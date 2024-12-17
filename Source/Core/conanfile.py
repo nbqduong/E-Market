@@ -13,6 +13,7 @@ class ExampleRecipe(ConanFile):
 
     def requirements(self):
         self.requires("pybind11/2.13.6")
+        self.requires("libcurl/8.10.1")
 
     def layout(self):
         cmake_layout(self)
